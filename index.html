@@ -1,0 +1,323 @@
+
+<!-- 
+    The <script> tag in the HTML file has the type="module" attribute for a specific reason when 
+    working with ES6 modules. Additionally, the src attribute is not used to reference myFunction
+    directly in this case. Let me explain the reasons for these choices: 
+
+         1. type="module" attribute:
+            When you specify type="module" in a <script> tag, you are telling the browser that the 
+            JavaScript file you are loading is an ES6 module. This enables the use of ES6 import and 
+            export statements within that script.
+            It segregates the code inside the module from the global scope, which helps prevent variable 
+            and function name collisions with other scripts in the HTML page.
+            It ensures that the script is fetched and executed as a module, following strict mode and 
+            ensuring a more modern and modular approach to JavaScript code organization.
+
+         2. src attribute:
+            The src attribute is used when you want to load an external JavaScript file. It's not used in this 
+            case because we are not directly loading an external JavaScript file that contains the myFunction 
+            code. Instead, we are importing myFunction from the index.js module, which, in turn, imports it 
+            from closure.js.
+            This is how ES6 modules work – they allow you to organize code into separate 
+            modules and import/export pieces of code between them.
+
+            In summary, using type="module" in the <script> tag tells the browser that the code inside the <script> 
+            is an ES6 module and should be treated as such. The absence of the src attribute is because the 
+            module code is not being directly loaded from an external file; it is being imported from other 
+            modules within the project. This is a modular and organized approach to structuring JavaScript 
+            code in modern web development.
+
+        Process:
+        -> install node
+        -> open terminal goto your folder or at gloabl level run: 
+        -> sudo npm install -g http-server
+        -> Once the installation is complete, start the server by running the following command 
+          in your project folder:
+        -> http-server
+
+           (or) You can install Browsersync globally using npm (Node Package Manager) with the following command:
+
+        -> after installing http-server as in line 3, run:
+        -> npm install -g browser-sync
+        -> browser-sync start --server --files "**/*.html, **/*.css, **/*.js" 
+        
+        || returns the first truthy value.
+        ?? returns the first defined value.
+
+        functions passed as arguments are known as callbacks.
+        The idea is that we pass a function and expect it to be “called back” later if necessary.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS Practice</title>
+
+
+    <!-- internal css -->
+    <style>
+        /* body {
+        	display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+
+        div.chessContainer {
+            display: grid;
+            grid-template-columns: repeat(8, 50px); /* 8 columns, each 50px wide */
+            grid-template-rows: repeat(8, 50px); 
+        }
+
+        div.white {
+            width: 50px;
+            height: 50px;
+            background-color: bisque;
+        }
+
+        div.black {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+        }
+
+        #box {
+            /* position: absolute; */
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            transition: transform 1s ease-in-out;
+        }
+    </style>
+
+    <!-- external css -->
+    <!-- <link rel="stylesheet" type="text/css" href="index.css"> -->
+</head>
+
+
+<body>
+    <div id="box"></div>
+    <!-- <script src="index.js"></script> -->
+    <script type="module">
+
+        import * as myImports from './index.js'
+
+        // function animateBox(startingPosition, distance) {
+        //     const box = document.getElementById('box');
+        //     setInterval(() => {
+        //         // move right first
+        //         box.style.transform = `translateX(${startingPosition + distance}px)`;
+        //         setTimeout(() => {
+        //             box.style.transform = `translateX(${startingPosition}px)`;
+        //         }, 1000)
+        //     }, 2000)
+        // }
+
+        // animateBox(0, 1200);
+
+
+
+        var calc = { 
+            total: 0, 
+            add(a) { 
+                this.total += a; 
+                return this; 
+            }, 
+            subtract(a) { 
+                this.total -= a;
+                return this; 
+            },
+            multiply(a) {
+                this.total *= a;
+                return this; 
+            }, 
+        };
+
+
+        const result = calc.add(10).multiply(5).subtract(30).add(10) 
+        console.log(result.total)
+
+
+        // let promiseResolveRecursive = promises => {
+        //     if (promises.length === 0) return;
+        //     let currProm = promises.shift(); // shifts from left i.e., first elem in array
+        //     let promiseToExec = typeof(currProm) === 'function' ? currProm() : currProm
+
+        //     promiseToExec.then(res => {
+        //         console.log(res)
+        //     }).catch(err => {
+        //         console.log(err)
+        //     })
+
+        //     promiseResolveRecursive(promises);
+
+        // }
+
+        // let prom1 = () => new Promise(resolve => resolve('prom1 resolved'))
+        // let prom2 = new Promise(resolve => resolve('prom2 resolved'))
+        // let prom3 = new Promise(resolve => resolve('prom3 resolved'))
+
+        // promiseResolveRecursive([prom1(), prom2, prom3])
+
+        // console.log(a);
+
+
+
+
+        // --------- reduce polyfill ---------
+
+        // var reduce = function(nums, fn, init) {
+        //     let acc = init;
+        //     for (let i=0 ; i<nums.length ; i++) {
+        //         if(acc) {
+        //             acc = fn(acc, nums[i])
+        //         }
+        //         else {
+        //            acc = nums[i];
+        //         }
+        //     }
+        //     return acc;
+        // };
+
+        // console.log(reduce([1,2,3,4],
+        //         function sum(accum, curr) { return accum + curr; },
+        //         0));
+
+        // --------- chess board ---------
+
+        // let pos="black";
+        // let chessContainer = document.createElement('div');
+        // chessContainer.setAttribute('class', 'chessContainer');
+
+        // let getPos = index => {
+        //     if (index%8 === 0) {
+        //         return pos;
+        //     }
+        //     return pos === "white" ? "black" : "white";
+        // }
+
+        // for (let i = 0; i < 64; i++) {
+        //     pos = getPos(i);
+        //     let chessCube = document.createElement('div'); // Create a new chessCube element
+        //     chessCube.setAttribute('class', pos);
+        //     chessContainer.appendChild(chessCube);
+        // }
+
+        // document.body.appendChild(chessContainer);
+
+        // --------- chess board ---------
+
+
+        // --------- Arrow Function ---------
+
+            // myImports.person.printNameArrow()
+            // myImports.person.printNameFunc()
+
+       // --------- Arrow Function ---------
+
+
+
+
+        // --------- currying ---------
+            // console.log(myImports.multiplyByTwo(10))
+            // console.log(myImports.multiplyByThree(10))
+            // console.log(myImports.doubleOfNum(10))
+
+        // --------- currying ---------
+
+
+        // --------- closures ---------
+
+            // myImports.f1()
+            // var w = myImports.f2()
+            // console.log(w())
+
+        // --------- closures ---------
+
+        // --------- setTimeout ---------
+            // myImports.setTimeOutFuncVar();
+            // myImports.setTimeOutFuncLet();
+            // myImports.setTimeoutFuncClosure();
+            // function greet() {
+            //     b = 'hello';
+            //     console.log(b); // hello
+            //     var b;
+            // }
+            // greet()
+        // --------- setTimeout ---------
+
+
+        // --------- PolyFills, call, apply, bind ---------
+
+            // const users = [
+            //     {fname: "name1", age: 25},
+            //     {fname: "name2", age: 26},
+            //     {fname: "name3", age: 26},
+            //     {fname: "name4", age: 27},
+            //     {fname: "name5", age: 27},
+            //     {fname: "name6", age: 27}
+            // ]
+
+            // myImports.getReduce(users)
+
+
+
+            // let ob1 = {
+            //     firstName: "John",
+            //     age: 26,
+            //     state: 'WI'
+            // }
+
+            // let ob2 = {
+            //     firstName: "Jack",
+            //     age: 27,
+            //     state: 'CA'
+            // }
+
+            // myImports.printDetails.call(ob1)
+            // myImports.printDetails.call(ob2)
+
+
+            // let ob = {
+            //     firstName: 'Sindhu',
+            //     age: 27
+            // }
+
+            // let functionName = function(place, country) {
+            //     console.log(`${this.firstName}, ${this.age}, ${place}, ${country}`)
+            // }
+
+            // let polyBind = functionName.myBind(ob, 'Madison', 'USA');
+            // console.log(polyBind())
+            // console.log(polyBind('USA'))
+            
+
+
+         // --------- PolyFills, call, apply, bind ---------
+
+
+        //  let user = {
+        //     name: "Sindhu",
+        //     address: {
+        //         personal: {
+        //             street: "134 N Butler Street",
+        //             Apt: "2",
+        //             zip: "53703",
+        //             city: "Madison",
+        //             state: "WI"
+        //         },
+        //         work: {
+        //             street: "400 Jefferson Park",
+        //             zip: "07981",
+        //             city: "Whippany",
+        //             state: "NJ"
+        //         }
+        //     },
+        //     phone: 6085909893,
+        //     age: 27
+        // }
+
+        // console.log(myImports.combineFields(user, "user"))
+
+    </script>
+</body>
+</html>

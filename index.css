@@ -1,0 +1,11 @@
+div.white {
+    width: 20px;
+    height: 20px;
+    background-color: bisque;
+}
+
+div.black {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}

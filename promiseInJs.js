@@ -46,12 +46,14 @@ createOrder().then(successMsg => console.log(successMsg))
   Then when the promise is being initialized, the synchronous code of console.log(1) is executed.
   
   However, promise is still in pending state, it is not settled, it can either be resolved or rejected
-  On line 29, promise is being resolved, and since this is asynchronous in nature, it not executed immediately,
-  the promise is registered and once settled it will be put in priority queue and then will be put into call stack.
+  On line 29, promise is being resolved, and since this is asynchronous in nature, it not executed 
+  immediately, the promise is registered and once settled it will be put in priority queue and then it'll 
+  be moved to the call stack.
   
   Then console logging "3" is also a synchronous action within the promise, so it is logged too.
   
-  So execution moved to next line and "end" is printed and then when the promise is resolved, "2" is logged
+  So execution moved to next line and "end" is printed and then when the promise 
+  is resolved, "2" is logged
 
 */
 
@@ -79,17 +81,29 @@ createOrder().then(successMsg => console.log(successMsg))
       OUTPUT:
   
       start
+      middle
       1
       3
-      middle
       end
       2
 
 
-  same as above, except that this promise is being returned from a function rather
-  than being assigned to a variable.
-  Hence while trying to resolve also, the "then" block is attched to the fucntion call,
-  because to get the promise, we must make a call to the function, which returns the promise.
+  first "start" is logged.
+
+  Here the promise is being returned from a function and not 
+  being assigned to a variable, like in previous example. So, the function
+  is assigned to promise2 variable.
+
+  next "middle" is printed
+
+  now we are calling the promise2() function, so upon function call, "1" & "3"
+  are logged, the "then" blocks executes when promise is settled, this is
+  asynchronous task so it wont execute immediately.
+
+  next "end" is printed
+  
+  then when the promise is settled, "2" is printed
+
   */
 
 /**
@@ -100,7 +114,7 @@ createOrder().then(successMsg => console.log(successMsg))
 
  let promise3 = new Promise((resolve, reject) => {
     console.log(1);
-    console.log(3);
+    console.log(2);
  });
 
  promise3.then(res => console.log(`Hello! ${res}`));
@@ -112,22 +126,26 @@ createOrder().then(successMsg => console.log(successMsg))
   
       start
       1
-      3
+      2
       end
 
   
-  This is because, first "start" is logged.
+  first "start" is logged
   
-  Then when the promise is being initialized, the synchronous code of console.log(1) and console.log(3) is executed.
+  Then when the promise is being initialized, the synchronous code of console.log(1) and 
+  console.log(3) is executed, printing  "1" & "2"
   
-  However, promise is still in pending state, it is not settled, it can either be resolved or rejected
+  However, promise is still in pending state, it is not settled, it can either be resolved 
+  or rejected
   
   Then the execution moves to next line and "end" is printed
   
-  Later we are trying to fulfill the promise. But since the promise was not settled when it was created i.e.,
-  neither resolved not rejected, the control never goes into the "then" block of promise, becasue "then" block is
-  executed only when a promise is resolved.
+  Later we are trying to fulfill the promise. But since the promise was not settled when it was 
+  created i.e., neither resolved not rejected, the control never goes into the "then" block of 
+  promise, becasue the "then" block is executed only when a promise is resolved.
+  
   Hence, the "Hello ${res}" is never executed.
+
   */
 
 
@@ -397,23 +415,8 @@ promiseAll([p1,p2,p3])
  *************************************************************************************************************************
 */
 
-// let promiseResolveRecursive = promises => {
-//     if (promises.length === 0) return ;
-//     for(let i=0; i< promises.length; i++) {
-//         let promiseToExec = typeof(promise[i]) === 'function' ? promise[i]() : promise[i]
 
-//         promiseToExec.then(res => {
-//             console.log(res)
-//         }).catch(err => {
-//             console.log(err)
-//         })
-
-//         promiseResolveRecursive(promises.slice(1));
-
-//     }
-// }
-
-let promiseResolveRecursive = promises => {
+let promiseResolveRecursiveArrModified = promises => {
     if (promises.length === 0) return;
     let currProm = promises.shift(); // shifts from left i.e., first elem in array
     let promiseToExec = typeof(currProm) === 'function' ? currProm() : currProm
@@ -425,14 +428,43 @@ let promiseResolveRecursive = promises => {
     })
 
     promiseResolveRecursive(promises);
-
 }
+
+// let promiseResolveRecursion1 = async (promises) => {
+//     if (promises.length === 0) return ;
+//     for(let i = 0; i < promises.length; i++) {
+//         let promiseToExec = typeof(promises[i]) === 'function' ? promises[i]() : promises[i]
+
+//         promiseToExec.then((res) => {
+//             console.log(res)
+//         }).catch((err) => {
+//             console.log(err)
+//         })
+
+//         promiseResolveRecursion1(promises.slice(1));
+//     }
+// }
+
+let promiseResolveRecursion = async (promises) => {
+    if (promises.length === 0) return ;
+        
+    let promiseToExec = typeof(promises[0]) === 'function' ? promises[0]() : promises[0]
+
+    promiseToExec.then((res) => {
+        console.log(res)
+    }).catch((err) => {
+        console.log(err)
+    })
+
+    promiseResolveRecursion1(promises.slice(1));
+}
+
 
 let prom1 = () => new Promise(resolve => resolve('prom1 resolved'))
 let prom2 = new Promise(resolve => resolve('prom2 resolved'))
-let prom3 = new Promise(resolve => resolve('prom3 resolved'))
+let prom3 = new Promise((resolve, reject) => reject('prom3 resolved'))
 
-promiseResolveRecursive([prom1, prom2, prom3])
+promiseResolveRecursion([prom1, prom2, prom3])
 
 /**
 *************************************************************************************************************************

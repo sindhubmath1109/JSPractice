@@ -415,6 +415,20 @@ promiseAll([p1,p2,p3])
  *************************************************************************************************************************
 */
 
+// let promiseResolveRecursion1 = async (promises) => {
+//     if (promises.length === 0) return ;
+//     for(let i = 0; i < promises.length; i++) {
+//         let promiseToExec = typeof(promises[i]) === 'function' ? promises[i]() : promises[i]
+
+//         promiseToExec.then((res) => {
+//             console.log(res)
+//         }).catch((err) => {
+//             console.log(err)
+//         })
+
+//         promiseResolveRecursion1(promises.slice(1));
+//     }
+// }
 
 let promiseResolveRecursiveArrModified = promises => {
     if (promises.length === 0) return;
@@ -430,20 +444,7 @@ let promiseResolveRecursiveArrModified = promises => {
     promiseResolveRecursive(promises);
 }
 
-// let promiseResolveRecursion1 = async (promises) => {
-//     if (promises.length === 0) return ;
-//     for(let i = 0; i < promises.length; i++) {
-//         let promiseToExec = typeof(promises[i]) === 'function' ? promises[i]() : promises[i]
-
-//         promiseToExec.then((res) => {
-//             console.log(res)
-//         }).catch((err) => {
-//             console.log(err)
-//         })
-
-//         promiseResolveRecursion1(promises.slice(1));
-//     }
-// }
+/*********************************************************************************/
 
 let promiseResolveRecursion = async (promises) => {
     if (promises.length === 0) return ;

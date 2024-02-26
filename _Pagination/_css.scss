@@ -1,0 +1,82 @@
+.todoCard {
+    display: flex;
+    gap: 0.5rem;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-color: antiquewhite;
+    height: 4rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+// footer
+.paginationButtons {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    // above styles to make it stick to the bottom
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0 2rem 0;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    // above styles to make it stick to the top
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// body
+.todoCardsList {
+    top: 110px; // header space
+    bottom: 70px; // footer space
+    overflow-y: auto;
+    position: absolute;
+    // above styles to add scroll only to the body section between header and footer
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.green {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: green
+}
+
+.orange {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: orange;
+}
+
+.loading {
+    margin-top: 4rem;
+    font-weight: 400;
+}
+
+.currentActivePgnBtn {
+    background-color: orange;
+    border: 1px solid gray;
+    border-radius: 2px;
+}
+
+#selectElemsOnPage {
+    margin: 1rem 0;
+    width: 5rem;
+}
+
+.todoCardId {
+    margin: 1rem;
+}

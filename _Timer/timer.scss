@@ -1,0 +1,53 @@
+
+#timerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+}
+
+.timerSlotsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+input {
+    border: 0.5px solid lightgray;
+    padding: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.startClass, .continueClass {
+    background-color: lightgreen;
+    border: none;
+    padding: 0.32rem 0.6rem;
+    border-radius: 5%;
+    width: 6rem;
+}
+
+.pauseClass {
+    background-color: lightsalmon;
+    border: none;
+    padding: 0.32rem 0.6rem;
+    border-radius: 5%;
+    width: 6rem;
+}
+
+.reset {
+    background-color: lightgray;
+    border: none;
+    padding: 0.32rem 0.6rem; 
+    border-radius: 5%;
+    width: 6rem;
+}

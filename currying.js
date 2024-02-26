@@ -51,11 +51,28 @@ export let doubleOfNum = multiplyClosure(2)
 // computeSum(0)(0)(1)()
 // computeSum(0)(0)(1)(2)(0)(3)(4)()
 
+/******************************************************************************************/
+
 export let computeSumSimple = a => {
     let sum = 0
     if (!a) return sum;
     return b => b ? computeSum(a+b) : (sum+a);
 }
+
+/******************************************************************************************/
+
+let sum = 0
+export let computeSumFunc = a => {
+    if (!a) return sum;
+    return function(b) {
+        if (b) {
+            return computeSumFunc(a+b)
+        }
+        return sum+a;
+    }
+}
+
+/******************************************************************************************/
 
 
 export function computeSum (a) {
@@ -63,6 +80,9 @@ export function computeSum (a) {
     if (!a && typeof(a) !== "number") return sum;
     return b => (!b && (typeof(b) !== "number")) ? (sum+a) : computeSum(a+b);
 }
+
+/******************************************************************************************/
+
 
 export let sumArrow = x => y => y ? sum(x + y) : x;
 

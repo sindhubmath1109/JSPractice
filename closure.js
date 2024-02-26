@@ -9,6 +9,7 @@
  * i.e., of its parent. so even if the function is exceuted outside of its scope, it
  * will remember its outer lexical environment.
  */
+
 export function f1() {
     let a = 7
     function y() {
@@ -17,6 +18,9 @@ export function f1() {
     y();
 }
 
+/******************************************************************************************/
+
+
 export function f2() {
     let m = 7
     function n() {
@@ -24,6 +28,9 @@ export function f2() {
     }
     return n;
 }
+
+/******************************************************************************************/
+
 
 export function getReduce(users) {
     let key;
@@ -40,3 +47,26 @@ export function getReduce(users) {
     }, {});
     console.log(output);
 }
+
+/******************************************************************************************/
+
+export function counter() {
+    let count = 0;
+
+    function increment() {
+        count += 1;
+        return count;
+    }
+
+    function decrement() {
+        if(count > 0) count -= 1;
+        return count;
+    }
+
+    return {
+        increment,
+        decrement
+    }
+}
+
+/******************************************************************************************/

@@ -13,10 +13,12 @@ export let flattenDeep = (arr, depth = 1) => {
 }
 
 export function flattenArr(arr) {
+  if (!Array.isArray(inputArr)) throw new error("Input must be an array");
+  if (inputArr.length === 0) return [];
+  
   let res = [];
-  debugger
+  
   for(let i=0; i<arr.length; i++) {
-    debugger;
     if (Array.isArray(arr[i])) {
       res = [...res, flattenArr(arr[i])]
     } else {
@@ -29,15 +31,14 @@ export function flattenArr(arr) {
 Array.prototype.flatten = (inputArr) => {
   if (!Array.isArray(inputArr)) throw new error("Input must be an array");
   if (inputArr.length === 0) return [];
+
   let result = []
+  
   inputArr.forEach(elem => {
       if (typeof(elem) !== 'object') {
-        debugger;
         result.push(elem)
       }
       else if (Array.isArray(elem)) {
-        const a = flatten(elem);
-        debugger
         result.push(...flatten(elem))
       }
       else {

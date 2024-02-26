@@ -470,3 +470,54 @@ promiseResolveRecursion([prom1, prom2, prom3])
 /**
 *************************************************************************************************************************
 */
+
+
+/**
+ *************************************************************************************************************************
+ *
+ * Given a list of Promises, execute them in the same sequence
+ * 
+ *************************************************************************************************************************
+*/
+
+            /* using async / await */
+
+const executePromInOrder = promiseTaks => {
+    let results = [], errors = [];
+
+    promiseTaks.forEach(async promise => {
+        let promToExecute = typeof promise === 'function' ? promise() : promise
+        try {
+            let result = await promToExecute;
+            results.push(result)
+        } catch(err) {
+            errors.push(err)
+        }
+    })
+
+    return { results, errors }
+}
+
+
+
+            /* using promises */
+
+const executePromInSameSequence = (promiseTaks, callback) => {
+    let results = [], errors = [], completedTasks = 0
+
+    promiseTaks.reduce((acc, promise) => {
+        return acc.finally(() => {
+            let currentProm = typeof promise === 'function' ? promise() : promise
+            currentProm.then(res => {
+                results.push(res)
+            }).catch(err => {
+                errors.push(err)
+            }).finally(() => {
+                completedTasks += 1
+                if (completedTasks >= promiseTaks.length) {
+                    callback(errors, results)
+                }
+            })
+        })
+    }, Promise.resolve())
+}

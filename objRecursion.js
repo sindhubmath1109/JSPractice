@@ -19,6 +19,8 @@ export let user = {
     age: 27
 }
 
+/******************************************************************************************/
+
 /**
  * 
  * @param {*} obj --> object to be parsed
@@ -39,6 +41,10 @@ export let combineFields = (obj, parentKey) => {
     return returnObj;
 }
 
+/******************************************************************************************/
+
+const clonedObject = {};
+
 export function deepClone(obj) {
     if (obj === null || typeof obj !== 'object') {
       return obj; // Base case: return non-object values or null as is
@@ -50,7 +56,6 @@ export function deepClone(obj) {
     }
   
     // Handle regular objects
-    const clonedObject = {};
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) { // hasOwnProperty will only check the keys of the object, not the ones in its prototype unlike includes() function
         clonedObject[key] = deepClone(obj[key]); // Recursively apply deepClone to each object property
@@ -59,5 +64,26 @@ export function deepClone(obj) {
   
     return clonedObject;
   }
-  
+
+
+/******************************************************************************************/
+
+  export let objDeepCloneDuplicate = obj => {
+
+    if (typeof obj !== 'object' || obj === null) {
+      return obj
+    }
+
+    if (Array.isArray(obj)) {
+      obj.map(objDeepCloneDuplicate)
+    }
+
+    for(let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObject[key] = objDeepCloneDuplicate(obj[key])
+      }
+    }
+
+    return clonedObject;
+  }
   

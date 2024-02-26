@@ -163,7 +163,7 @@ cafe.printBvgArrow()
  * Uncaught TypeError: Cannot read properties of undefined (reading 'beverage')
  * 
  * 
- * Since the 'printBvgArrow' functiion itself is an arrow function, it cannot access 'this'.
+ * Since the 'printBvgArrow' function itself is an arrow function, it cannot access 'this'.
  * Hence when we try to access 'this.beverages', the above error is thrown, since 'this' is
  * undefined.
  * 
@@ -205,6 +205,7 @@ dogBreed.printBreedName()
 const dogBreed3 = new Dog()
 dogBreed.printBreedName() 
 // undefined, because breed was not initialized while instansiating
+
 dogBreed.breed = 'Shiba Inu'
 dogBreed.printBreedName() 
 // Shiba Inu

@@ -10,7 +10,7 @@ function x () {
 
 
 /*
-********************************************************** 1 ******************************************************************
+*******************************************************************************************
 */
 
 function x1 () {
@@ -110,7 +110,7 @@ console.log(parent());
  */
 
 
-// Output: “TypeError: hoisted is not a function”
+// Output: “TypeError: x is not a function”
 
 /*
 ********************************************************** 5 ******************************************************************
@@ -129,9 +129,11 @@ alert(foo());
  * The function foo() itself will be hoisted in the global scope as
  * its a function declaration.
  * 
- * Inside foo(), both the bar()functions are function expressions.
+ * Inside foo(), both the bar() functions are function expressions.
  * 
- * Hence no hoisting, the first one will be executed and returned.
+ * Hence when hoisted it will be undefined, and during runtime, the 
+ * first one will be assigned to bar and executed in the next and returned.
+ * Hence 3 is returned.
  * 
  * The second bar() will not be read by the interpreter ahead of time.
  */
@@ -206,7 +208,7 @@ function getShape(condition) {
         return shape;
     } else { 
         // shape exists here also with a value of "undefined" 
-        return false;
+        return shape;
     }
 }
 

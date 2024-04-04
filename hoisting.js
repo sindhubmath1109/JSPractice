@@ -17,7 +17,9 @@ function x1 () {
     var a = 10;
 }
 
-console.log(a); // error thrown as 'a' has functional scope and hence is available in function 'x1'
+console.log(a); 
+
+// error thrown as 'a' has functional scope and hence is available in function 'x1'
 
 
 /*
@@ -46,6 +48,37 @@ alert(foo());
 
 
 // Output: 8
+
+
+/*
+********************************************************** 5 ******************************************************************
+*/
+
+function foo() {
+    var bar = function() { return 3 }
+    return bar();
+    var bar = function() { return 8 }
+}
+
+alert(foo());
+
+
+/**
+ * The function foo() itself will be hoisted in the global scope as
+ * its a function declaration.
+ * 
+ * Inside foo(), both the bar() functions are function expressions.
+ * 
+ * Hence when hoisted it will be undefined, and during runtime, the 
+ * first one will be assigned to bar and executed in the next and returned.
+ * Hence 3 is returned.
+ * 
+ * The second bar() will not be read by the interpreter ahead of time.
+ */
+
+
+// Output: 3
+
 
 /*
 ********************************************************** 3 ******************************************************************
@@ -111,35 +144,6 @@ console.log(parent());
 
 
 // Output: “TypeError: x is not a function”
-
-/*
-********************************************************** 5 ******************************************************************
-*/
-
-function foo() {
-    var bar = function() { return 3 }
-    return bar();
-    var bar = function() { return 8 }
-}
-
-alert(foo());
-
-
-/**
- * The function foo() itself will be hoisted in the global scope as
- * its a function declaration.
- * 
- * Inside foo(), both the bar() functions are function expressions.
- * 
- * Hence when hoisted it will be undefined, and during runtime, the 
- * first one will be assigned to bar and executed in the next and returned.
- * Hence 3 is returned.
- * 
- * The second bar() will not be read by the interpreter ahead of time.
- */
-
-
-// Output: 3
 
 
 /*
@@ -212,6 +216,9 @@ function getShape(condition) {
     }
 }
 
+getShape(false) // output_1
+getShape(true)  // output_2
+
 /**
  * shape’s declaration is hoisted at the top of getShape() function. 
  * 
@@ -223,6 +230,7 @@ function getShape(condition) {
 
 
  // OUTPUT : undefined
+ // OUTPUT: 'square'
 
 /*
 ********************************************************** 9 ******************************************************************
@@ -255,9 +263,9 @@ function outer() {
     var z = 2
     function inner() {
         z++;
-        console.log(z)
+        console.log(z) // output_1
         var z = 3;
-        console.log(z)
+        console.log(z) // output_2
     }
     inner();
 }
@@ -266,8 +274,8 @@ outer();
 
 /**
  * OUTPUT:
- * line 226 prints: NaN
- * line 228 prints: 3
+ * output_1: NaN
+ * output_2: 3
  */
 
 /**

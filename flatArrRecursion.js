@@ -2,18 +2,18 @@
 /***************************************** flatten with depth *************************************************/
 
 export let flattenDeep = (arr, depth = 1) => {
-  let resultFlatArr = [];
+  let result = [];
   for(let i=0; i< arr.length; i++) {
     if (Array.isArray(arr[i]) && depth > 0) {
-      resultFlatArr.push(...flattenDeep(arr[i], depth-1))
+      result.push(...flattenDeep(arr[i], depth-1))
     }
     else {
-      resultFlatArr.push(...arr[i])
+      result.push(arr[i])
     }
   }
-  return resultFlatArr;
+  return result;
 }
-
+  
 /***************************************** using for loop *************************************************/
 
 export function flattenArr(arr) {

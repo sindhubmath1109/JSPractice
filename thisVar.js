@@ -173,10 +173,12 @@ cafe.printBvgArrow()
 ****************************************************** ARROW FUNCTION ****************************************************************
 */
 
-cafe.printCafeMenu() // undefined because arrow function --> discuss later in detail
+cafe.printCafeMenu()
 
 /**
+ * OUTPUT: undefined 
  * 
+ * ---> because arrow function
  * Just like as explained above, arrow functions are bound to the scope of their lexical enviroment.
  * In case of printCafeMenu function, which is a direct property of the object, its lexical socope is
  * nothing but the window object, hence 'this' references the 'window' object causing 'this.cafeMenu'
@@ -209,7 +211,7 @@ dogBreed.printBreedName()
 dogBreed.breed = 'Shiba Inu'
 dogBreed.printBreedName() 
 // Shiba Inu
-// or write a setter method, or assigna default breed inside the function / constructor itself
+// or write a setter method, or assign a default breed inside the function / constructor itself
 
 
 /*

@@ -147,7 +147,7 @@ const isPalindrome = (str, start=0, end) => {
 const user = { 
     name: 'Piyush Agarwal!', 
     logMessage() { 
-        console.log(this.name); 
+        console.log('------', this.name); 
     } 
 }; 
 
@@ -161,7 +161,7 @@ setTimeout(user.logMessage, 1000);
 var length = 4; 
 
 function callback() { 
-    console.log(this.length); // What is logged? 
+    console.log('------',this.length); // What is logged? 
 } 
 
 const object = { 

@@ -42,7 +42,7 @@
 ****************************************************************************************************************************
 */
 
-  Array.prototype.reduce = function (callbackFunc) {
+  Array.prototype.reduce = function (callbackFunc, initVal) {
     let array = this;
     let acc = initVal;
 

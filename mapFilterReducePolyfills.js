@@ -2,7 +2,15 @@
 ****************************************************************************************************************************
 */
 
-  Array.prototype.map = (callbackFunc) => {
+/**
+ * 
+ * function statement must be used and not arrow functions because of 'this' variable binding
+ * function statement must be used and not arrow functions because of 'this' variable binding
+ * function statement must be used and not arrow functions because of 'this' variable binding
+ * function statement must be used and not arrow functions because of 'this' variable binding
+ * 
+ **/ 
+  Array.prototype.map = function (callbackFunc) {
     let array = this;
     let returnArr = [];
 
@@ -17,7 +25,7 @@
 ****************************************************************************************************************************
 */
 
-  Array.prototype.filter = (callbackFunc) => {
+  Array.prototype.filter = function (callbackFunc) {
     let array = this;
     let returnArr = [];
 
@@ -34,7 +42,7 @@
 ****************************************************************************************************************************
 */
 
-  Array.prototype.reduce = (initVal, callbackFunc) => {
+  Array.prototype.reduce = function (callbackFunc) {
     let array = this;
     let acc = initVal;
 

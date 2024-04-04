@@ -28,7 +28,7 @@ export function UserName(name) {
   
 export const UserArrow = name => {
     this.name = name;
-  };
+};
 
 
   class Person {
@@ -54,4 +54,3 @@ export const UserArrow = name => {
 
  export let person = new Person('Bob');
  
-  

@@ -33,6 +33,8 @@ let multiplyClosure = function(x) {
 }
 
 export let doubleOfNum = multiplyClosure(2)
+doubleOfNum(3) // 6
+doubleOfNum(4) // 8
 
 
 /**

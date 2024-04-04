@@ -70,3 +70,48 @@ export function counter() {
 }
 
 /******************************************************************************************/
+
+/* 
+ * Cache implementation using Closures
+ */
+
+function createCache() {
+    const cache = {};
+  
+    return {
+      get(key) {
+        return cache[key];
+      },
+      set(key, value) {
+        cache[key] = value;
+      },
+      remove(key) {
+        delete cache[key];
+      },
+      clear() {
+        Object.keys(cache).forEach(key => {
+          delete cache[key];
+        });
+      },
+      getAll() {
+        return { ...cache };
+      }
+    };
+  }
+  
+  // Example usage:
+  const cache = createCache();
+  
+  cache.set('name', 'John');
+  cache.set('age', 30);
+  
+  console.log(cache.get('name')); // Output: John
+  console.log(cache.get('age')); // Output: 30
+  
+  cache.remove('age');
+  console.log(cache.get('age')); // Output: undefined
+  
+  cache.clear();
+  console.log(cache.getAll()); // Output: {}
+  
+  /******************************************************************************************/

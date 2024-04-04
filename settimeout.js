@@ -1,3 +1,5 @@
+
+
 export function setTimeOutFuncVar() {
     for(var i=1; i<=5; i++) {
         setTimeout(() => {
@@ -39,14 +41,19 @@ export function setTimeOutFuncLet() {
 }
 
 /*
- * let variables have a block scope, so within the fo loop block, 
+ * prints 1,2,3,4,5
+
+ * 'let' variables have a block scope, so within the for loop block, 
  * the value of 'i' is a brand new variable within that block 
- * unlike var type, since var doesn't have block scope, the lexical
- * environment for the variable "i" is the same and hence the timer
+ * unlike 'var' type.
+ * 
+ * Since 'var' doesn't have block scope, the lexical environment
+ * for the variable "i" is the same and hence the timer
  * runs until 6 and then the callback function within settimeout is 
- * run so the value of "i" when printed is already. 
- * But for the timer, it does preserve the value of "i" as in the for 
- * loop and that value of "i" gets attached to the timer.
+ * run, the value of "i" when printed is already incremented. 
+ * 
+ * But for the timer, it does preserve the value of "i", i.e., the 'for 
+ * loop' and that value of "i" gets attached to the timer.
  */
 
 // ------------------------------------------------------------------------------------------------------------------
